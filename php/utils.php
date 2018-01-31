@@ -1,5 +1,21 @@
 <?php
 
+/**
+* WebScrapper PHP utility
+* https://github.com/fraigo/webscrapper/
+* Author     : Francisco Igor (franciscoigor@gmail.com)
+* License    : Apache 2.0 
+* Last update: 2018-01-31
+*
+* A Work in progress
+* To-do:
+* - Cache folder cleaning
+* - JSON output
+* - Database support
+* - Better filtering options
+* - More content extraction types
+*/
+
 define("CACHE_FOLDER","cache");
 
 /**
