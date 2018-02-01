@@ -168,16 +168,23 @@ function getItems($doc,$tags,$values=null){
 function filterItems($items,$cols,$cfg){
     $result=[];
     foreach($items as $item){
+        $extract=false;
         foreach($cfg as $key=>$val){
-            if($item[$key]==$val){
-                $row=[];
-                foreach($cols as $col){
-                    $row[$col]=$item[$col];
-                }
-                $result[]=$row;
-                continue;
+            if (is_array($val)){
+                $extract=call_user_func($val[0],$item[$key]);
+            }else if($item[$key]==$val){
+                $extract=true;
             }
         }
+        if ($extract){
+            $row=[];
+            foreach($cols as $col){
+                $row[$col]=$item[$col];
+            }
+            $result[]=$row;
+            continue;
+        }
+
     }
     return $result;
 }
