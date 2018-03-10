@@ -55,6 +55,7 @@ function getCache($id,$default=null){
 *  None
 */
 function setCache($id,$data){
+    if (!file_exists(CACHE_FOLDER)) mkdir(CACHE_FOLDER);
     $datetime=date("YmdH");
     $fileid=$datetime."_".md5($id);
     file_put_contents(CACHE_FOLDER."/$fileid",serialize($data));
