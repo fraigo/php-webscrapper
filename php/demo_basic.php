@@ -57,6 +57,8 @@ $config[]=[
 	"filter"=>["class3"=>"rating-comment"]
 ];
 
+echo "Processing URLs<br>".implode("<br>",$urls);
+
 //process and merge all three structures in one
 //setting the 3rd parameter in false will return three separated structures
 $final=processDocuments($urls,$config,true);
