@@ -16,13 +16,26 @@
 <h2>Basic Demo</h2>
 
 <ol>
-    <li>Analize a sequence of page results for doctors in BC. </li>
+    <li>Analize a sequence of page results for rating of doctors in Vancouver, BC. </li>
     <li>Extract some relevant information (name, user rating, comments) </li>
     <li>Structure the data and return a list of fields extracted</li>
-    <li>Show the structured data</li>
+    <li>Show the structured data (table view)</li>
 </op>
 
-<a href="demo_basic">View demo</a>
-    
+<a href="demo_basic.php">View demo</a>
+
+
+<h2>Filter Demo</h2>
+
+<ol>
+    <li>Extract a list of the top GitHub Projects.</li>
+    <li>Extract some relevant information (project name, stars, forks) using function filters</li>
+    <li>Structure the data and return a list of fields extracted</li>
+    <li>Show the structured data (table view)</li>
+</op>
+
+<a href="demo_filter.php">View demo</a>
+
+
 </body>
 </html>

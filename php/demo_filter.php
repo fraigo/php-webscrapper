@@ -15,15 +15,22 @@ $urls[]="https://github.com/explore?since=monthly";
 
 //Process Configurations 
 
-//Task: Extract doctor names
+//Task: Extract project name
 //Extract class name (attribute.class) and content (textContent) from links (a)
 //Use class1 as alias for class attribute and name for content
-//Filter only tags with class name equal to 'search-item-doctor-link'
+//Filter only project names (part1)
+
+function isProject($value){
+	if ($value=="f4 lh-condensed mb-1") return true;
+	if ($value=="f3") return true;
+	return false;
+}
+
 $config[]=[
-	"tags"=>["h3"],
+	"tags"=>["h1","h3"],
 	"elements"=>["class1"=>"attribute.class","project_name"=>"textContent"],
 	"fields"=>["project_name"],
-	"filter"=>["class1"=>"f3"]
+	"filter"=>["class1"=>["isProject"]]
 ];
 
 

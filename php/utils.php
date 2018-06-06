@@ -237,8 +237,12 @@ function printRow($row,$index=null){
 *  A unique 2D array with merged columns of data
 */
 function mergeData($data1,$data2){
-    if (count($data1)!=count($data2)){
-        die("Row numbers do not match");
+    $count1=count($data1);
+    $count2=count($data2);
+    if ($count1!=$count2){
+        debug($data1);
+        debug($data2);
+        die("Row numbers do not match ($count1/$count2)");
     }
     foreach($data1 as $key=>$row){
         $data1[$key]=array_merge($row,$data2[$key]);
@@ -286,3 +290,12 @@ function processDocuments($urls,$config,$merged=true){
     return $final;
 }
 
+
+/**
+ * Show data
+ */
+function debug($data){
+    echo "<pre style='background-color:#FFC'>";
+    print_r($data);
+    echo "</pre>";
+}
