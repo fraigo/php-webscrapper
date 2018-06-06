@@ -57,7 +57,11 @@ $config[]=[
 	"filter"=>["class3"=>"rating-comment"]
 ];
 
-echo "Processing URLs<br>".implode("<br>",$urls);
+echo "Processing URLs<br>";
+foreach($urls as $url){
+	echo "<a href=$url >$url</a><br>";
+}
+
 
 //process and merge all three structures in one
 //setting the 3rd parameter in false will return three separated structures
