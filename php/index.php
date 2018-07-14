@@ -20,7 +20,7 @@
     <li>Extract some relevant information (name, user rating, comments) </li>
     <li>Structure the data and return a list of fields extracted</li>
     <li>Show the structured data (table view)</li>
-</op>
+</ol>
 
 <a href="demo_basic.php">View demo</a>
 
@@ -32,7 +32,7 @@
     <li>Extract some relevant information (project name, stars, forks) using function filters</li>
     <li>Structure the data and return a list of fields extracted</li>
     <li>Show the structured data (table view)</li>
-</op>
+</ol>
 
 <a href="demo_filter.php">View demo</a>
 
