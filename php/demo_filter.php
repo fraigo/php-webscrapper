@@ -15,10 +15,10 @@ $urls[]="https://github.com/explore?since=monthly";
 
 //Process Configurations 
 
-//Task: Extract project name
+//Task1: Extract project name
 //Extract class name (attribute.class) and content (textContent) from links (a)
 //Use class1 as alias for class attribute and name for content
-//Filter only project names (part1)
+//Filter only project names (part1) using a filter function isProject()
 
 function isProject($value){
 	if ($value=="f4 lh-condensed mb-1") return true;
@@ -34,12 +34,15 @@ $config[]=[
 ];
 
 
+
+//Task2: Extract project stars 
+//Extract class name (attribute.class), content (textContent) and link (attribute.href) from links (a)
+//Use "class1" as alias for class attribute and "link_stars" for the link
+//Filter only specific class names (d-inline-block link-gray mr-4) and links with a filter function isStar()
+
+
 function isStar($value){
 	return substr($value,-6)=="gazers";
-}
-
-function isNetwork($value){
-	return substr($value,-7)=="network";
 }
 
 $config[]=[
@@ -48,6 +51,16 @@ $config[]=[
 	"fields"=>["project_stars","link_stars"],
 	"filter"=>["class1"=>"d-inline-block link-gray mr-4","link_stars"=>["isStar"]]
 ];
+
+//Task3: Extract project network 
+//Extract class name (attribute.class), content (textContent) and link (attribute.href) from links (a)
+//Use "class1" as alias for class attribute and "link_stars" for the link
+//Filter only specific class names (d-inline-block link-gray mr-4) and links with a filter function isNetwork()
+
+function isNetwork($value){
+	return substr($value,-7)=="network";
+}
+
 $config[]=[
 	"tags"=>["a"],
 	"elements"=>["class1"=>"attribute.class","project_network"=>"textContent","link_network"=>"attribute.href"],
@@ -58,9 +71,6 @@ $config[]=[
 
 //process and merge all structures in one
 $final1=processDocuments($urls,$config,true);
-
-//style for the table cells only (bordered)
-echo "<style> td { border: 1px solid #eee} </style>";
 
 //prints the HTML table with result
 printTable($final1);

@@ -1,6 +1,8 @@
 <?php
 error_reporting( E_ALL  & ~E_NOTICE);
 
+$ISDEBUG=$_GET["debug"];
+
 //API for web scrapper
 require_once("utils.php");
 
@@ -57,18 +59,17 @@ $config[]=[
 	"filter"=>["class3"=>"rating-comment"]
 ];
 
-echo "Processing URLs<br>";
-foreach($urls as $url){
-	echo "<a href=$url >$url</a><br>";
+if ($ISDEBUG){
+	debug( "Processing URLs");
+	foreach($urls as $url){
+		debug($url);
+	}	
 }
 
 
 //process and merge all three structures in one
 //setting the 3rd parameter in false will return three separated structures
 $final=processDocuments($urls,$config,true);
-
-//style for the table cells only (bordered)
-echo "<style> td { border: 1px solid #eee} </style>";
 
 //prints the HTML table with result
 printTable($final);

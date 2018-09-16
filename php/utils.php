@@ -1,5 +1,6 @@
 <?php
 
+
 /**
 * WebScrapper PHP utility
 * https://github.com/fraigo/webscrapper/
@@ -17,6 +18,14 @@
 */
 
 define("CACHE_FOLDER","cache");
+
+
+/**
+ * Detect if it's a PHP console application (for text output instead of HTML)
+ */
+function isConsole(){
+    return ( php_sapi_name() == 'cli' );
+} 
 
 /**
 * getCache Get a cached copy of data identified by ID. 
@@ -59,6 +68,12 @@ function setCache($id,$data){
     $datetime=date("YmdH");
     $fileid=$datetime."_".md5($id);
     file_put_contents(CACHE_FOLDER."/$fileid",serialize($data));
+}
+
+function cleanText($text){
+    $text=trim($text);
+    $text=str_replace("\n"," ",$text);
+    return $text;
 }
 
 /**
@@ -136,13 +151,12 @@ function getItems($doc,$tags,$values=null){
                 if ($prop=="attribute"){
                     foreach($item->attributes as $attr){
                         if($attr->name==$index){
-                            $result[$alias]=$attr->value;
+                            $result[$alias]=cleanText($attr->value);
                         }
-                        
                     }
                 }
                 if ($prop=="textContent"){
-                    $result[$alias]=$item->textContent;
+                    $result[$alias]=cleanText($item->textContent);
                 }
                 if ($prop=="html"){
                     $result[$alias]=htmlentities($doc->saveHTML($item));
@@ -190,42 +204,6 @@ function filterItems($items,$cols,$cfg){
     return $result;
 }
 
-/*
-* printTable: Print a 2D array as HTML table
-* Parameters:
-*  $data    array   Array of rows to be printed
-*  $header  array   (optional) Array of column names. 
-*                   If none is specified, it uses the column names
-*/
-function printTable($data,$header=null){
-    if (!$header){
-        $headers=array_keys($data[0]);
-    }
-    echo "<table>";
-    printRow($headers,"#");
-    foreach($data as $idx=>$item){
-        printRow($item,$idx+1);
-    }
-    echo "</table>";
-}
-
-/*
-* printRow: Prints a single HTML row using array values.
-* Parameters:
-*  $row   : Array of elements to be printed as cells
-*  $index : If set, adds an extra initial column with index value
-*/
-function printRow($row,$index=null){
-    echo "<tr>";
-    if($index!==null){
-        echo "<td>$index</td>";
-    }
-    foreach($row as $item){
-        echo "<td>$item</td>";
-    }
-    echo "</tr>";
-
-}
 
 /*
 * mergeData: Merges 2d data from two 2D arrays, row by row
@@ -291,11 +269,66 @@ function processDocuments($urls,$config,$merged=true){
 }
 
 
+
+/*
+* printTable: Print a 2D array as HTML table
+* Parameters:
+*  $data    array   Array of rows to be printed
+*  $header  array   (optional) Array of column names. 
+*                   If none is specified, it uses the column names
+*/
+function printTable($data,$header=null){
+
+    if (isConsole()){
+        debug(implode("\t",array_keys($data[0])));
+        foreach ($data as $row){
+            debug(implode("\t",$row));
+        }
+        return;
+    }
+
+    //style for the table cells only (bordered)
+    echo "<style> td { border: 1px solid #ccc} </style>";
+
+    if (!$header){
+        $headers=array_keys($data[0]);
+    }
+    echo "<table>";
+    printRow($headers,"#");
+    foreach($data as $idx=>$item){
+        printRow($item,$idx+1);
+    }
+    echo "</table>";
+}
+
+/*
+* printRow: Prints a single HTML row using array values.
+* Parameters:
+*  $row   : Array of elements to be printed as cells
+*  $index : If set, adds an extra initial column with index value
+*/
+function printRow($row,$index=null){
+    echo "<tr>";
+    if($index!==null){
+        echo "<td>$index</td>";
+    }
+    foreach($row as $item){
+        echo "<td>$item</td>";
+    }
+    echo "</tr>";
+
+}
+
 /**
  * Show data
  */
 function debug($data){
-    echo "<pre style='background-color:#FFC'>";
+    if (!isConsole()){
+        echo "<pre style='background-color:#FFC'>";
+    }
     print_r($data);
-    echo "</pre>";
+    echo "\n";
+    if (!isConsole()){
+        echo "</pre>";
+    }
 }
