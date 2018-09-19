@@ -1,13 +1,14 @@
 <?php
 
-define("BASEURL","https://www.bbc.com/news/technology");
+define("BASEURL","https://www.bbc.com");
+define("FULLURL",BASEURL."/news/technology");
 
 //API for web scrapper
 require_once("utils.php");
 
 //base call structures
 $config=[];
-$urls=[BASEURL];
+$urls=[FULLURL];
 
 
 //Process Configurations 
@@ -30,6 +31,9 @@ $config[]=[
 function baseRef($url){
   if (strpos($url,"/")===0){
     return cleanText(BASEURL.$url);
+	}
+	if (strpos($url,"://")===false){
+    return cleanText(FULLURL.$url);
   }
   return cleanText("$url");
 }
