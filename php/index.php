@@ -25,7 +25,7 @@
 <a href="demo_basic.php">View demo</a>
 
 
-<h2>Filter Demo</h2>
+<h2>Content Filter Demo</h2>
 
 <ol>
     <li>Extract a list of the top GitHub Projects.</li>
@@ -36,6 +36,17 @@
 
 <a href="demo_filter.php">View demo</a>
 
+
+<h2>Content transformation Demo</h2>
+
+<ol>
+    <li>Extract a list of the news headers from BBC News.</li>
+    <li>Extract some relevant information (News headers, link URLs) using a transformation function (in this case to fill the relative URLS with the base URL)</li>
+    <li>Structure the data and return a list of fields extracted</li>
+    <li>Show the structured data (table view)</li>
+</ol>
+
+<a href="demo_bbcnews.php">View demo</a>
 
 </body>
 </html>
