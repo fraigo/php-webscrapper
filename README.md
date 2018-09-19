@@ -4,8 +4,8 @@ Web scrapper utility API  to extract structured data from web pages
 These utilities can be used to **retrieve**, **extract**, **filter** and **merge** data from web sites
 
 
-Usage
-------
+## Usage
+
 
 1. Define a **list of urls** from the same site to process
     * Copy or generate the URLs for **distinct pages** of the same listing, for example: 
@@ -24,15 +24,17 @@ Usage
            * ->transform : Append to make a data transformation using a local function name (Example: `attribute.href->fixAttribute`)
          * **Filters** to select only the right information to process
       * Write a processing configuration  structure (array) using your configuration (one or more configuration items). For example:
->
 
+```php
      $cfg=[ 	
-       [	"tags"=>["span"],
-    	 	"elements"=>["class2"=>"attribute.class", "rating"=>"attribute.title"],
-    		"fields"=>["rating"],
-    		"filter"=>["class2"=>"star-rating"] 
+       [	
+         "tags"=>["span"],
+         "elements"=>["class2"=>"attribute.class", "rating"=>"attribute.title"],
+         "fields"=>["rating"],
+         "filter"=>["class2"=>"star-rating"] 
        ] 
     ]
+```
 
 3. Call the web scrapper process using the **URLs** and **configuration**.
     * `processDocuments($urls,$cfg);`
@@ -45,9 +47,19 @@ Usage
 |3|Barbara Streisand|4.92|Awesome singer!|
 
 
+<<<<<<< HEAD
 ## Demos
 
 * php/demo_basic.php : Basic demo using a doctor ratings page
 * php/demo_filter.php : Demo from GitHub site using functions to filter content using custom logic
 * php/demo_bbcnews.php : Demo for bbcnews.com to extract news headers and links using data transformation functions to extract imformation.
 
+=======
+## Console support
+
+You can call your php web scrapper script from console to get the results in plain text and save to a file:
+
+```
+php php/demo_filter.php > results.csv
+```
+>>>>>>> cb7b9b56a5e71b82123944765142ad7dd1a6b695
