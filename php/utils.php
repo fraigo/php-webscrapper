@@ -144,19 +144,23 @@ function getItems($doc,$tags,$values=null){
         foreach($items as $item){
             $result=[];
             foreach($values as $alias=>$value){
-                list($prop,$index)=explode(".",$value);
+                list($elem,$func)=explode("->",$value);
+                list($prop,$index)=explode(".",$elem);
+                if (!$func){
+                    $func="cleanText";
+                }
                 if ($prop=="tagname"){
                     $result[$alias]=$tag;
                 }
                 if ($prop=="attribute"){
                     foreach($item->attributes as $attr){
                         if($attr->name==$index){
-                            $result[$alias]=cleanText($attr->value);
+                            $result[$alias]=$func($attr->value);
                         }
                     }
                 }
                 if ($prop=="textContent"){
-                    $result[$alias]=cleanText($item->textContent);
+                    $result[$alias]=$func($item->textContent);
                 }
                 if ($prop=="html"){
                     $result[$alias]=htmlentities($doc->saveHTML($item));
