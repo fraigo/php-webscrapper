@@ -4,7 +4,7 @@ error_reporting( E_ALL  & ~E_NOTICE);
 $ISDEBUG=$_GET["debug"];
 
 //API for web scrapper
-require_once("utils.php");
+require_once("scraper.php");
 
 //base call structures
 $config=[];
