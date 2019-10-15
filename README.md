@@ -47,14 +47,12 @@ These utilities can be used to **retrieve**, **extract**, **filter** and **merge
 |3|Barbara Streisand|4.92|Awesome singer!|
 
 
-<<<<<<< HEAD
 ## Demos
 
 * php/demo_basic.php : Basic demo using a doctor ratings page
 * php/demo_filter.php : Demo from GitHub site using functions to filter content using custom logic
 * php/demo_bbcnews.php : Demo for bbcnews.com to extract news headers and links using data transformation functions to extract imformation.
 
-=======
 ## Console support
 
 You can call your php web scrapper script from console to get the results in plain text and save to a file:
@@ -62,4 +60,3 @@ You can call your php web scrapper script from console to get the results in pla
 ```
 php php/demo_filter.php > results.csv
 ```
->>>>>>> cb7b9b56a5e71b82123944765142ad7dd1a6b695
